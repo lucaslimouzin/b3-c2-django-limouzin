@@ -17,9 +17,10 @@
         <div class="accordeon-body">
           <p>URL: <a>{{ site.site_url }}</a></p>
           <p>Identifiant: {{ site.username }}</p>
-          <p>Mot de passe: <span id="password" data-password="{{ site.password }}" data-password-length="{{ site.password|length }}"></span>
+          <p>Mot de passe: {{ site.password }}</p>
+          <!-- <p>Mot de passe: <span id="password" data-password="{{ site.password }}" data-password-length="{{ site.password|length }}"></span>
             <i id="togglePassword{{ site.id }}" class="far fa-eye" onclick="togglePasswordVisibility('password{{ site.id }}')"></i>
-        </p>
+        </p> -->
           <form method="get" action="{% url 'edit_site' site.id %}">
             {% csrf_token %}
             <button type="submit" class="btn btn-edit">Éditer</button>
