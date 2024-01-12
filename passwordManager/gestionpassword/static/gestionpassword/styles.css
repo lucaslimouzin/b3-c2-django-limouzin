@@ -59,14 +59,55 @@ a:hover, a:focus {
 }
 
 /* Styles pour les accordéons */
-.accordion {
-    
+.accordeon {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
 }
 
-.accordion-header {
+.accordeon-header {
+    background-color: #00b4d8; 
+    color: #ffffff; 
+    padding: 10px 15px;
+    font-size: 16px;
     cursor: pointer;
+    position: relative;
 }
 
-.accordion-body {
+.accordeon-header::after {
+    content: '+'; 
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #ffffff; 
+}
+
+.accordeon-header.active::after {
+    content: '-'; 
+}
+
+.accordeon-body {
     display: none;
+    padding: 10px 15px;
+    background-color: #f0f0f0; 
+    font-size: 14px;
+    line-height: 1.6; 
+}
+
+/* Styles spécifiques au mode sombre pour les accordéons */
+body.dark-mode .accordeon-header {
+    background-color: #263238; 
+    color: #ECECF1; 
+}
+
+body.dark-mode .accordeon-header::after {
+    color: #ECECF1; 
+}
+
+body.dark-mode .accordeon-body {
+    background-color: #455A64; 
+    color: #ECECF1;
 }

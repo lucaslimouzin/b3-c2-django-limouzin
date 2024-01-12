@@ -41,6 +41,21 @@
                 document.body.classList.add('dark-mode');
             }
         }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.accordeon-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    var body = this.nextElementSibling;
+                    if (body.style.display === "block") {
+                        body.style.display = "none";
+                    } else {
+                        body.style.display = "block";
+                    }
+                });
+            });
+        });
         </script>
 </body>
 </html>
