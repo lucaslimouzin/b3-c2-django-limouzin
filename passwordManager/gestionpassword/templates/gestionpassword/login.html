@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Manager</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'gestionpassword/styles.css' %}">
+</head>
+<body>
+    <div id="container">
+        <h1>Bienvenue sur Password Manager</h1>
+        <p>Pour utiliser cette application, veuillez vous connecter ou vous inscrire.</p>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Nom d'utilisateur">
+            <input type="password" name="password" placeholder="Mot de passe">
+            <input type="submit" value="Se Connecter">
+            <a href="{% url 'signup' %}">S'inscrire</a>
+        </form>
+    </div>
+</body>
+</html>
