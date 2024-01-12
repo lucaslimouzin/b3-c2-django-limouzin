@@ -13,7 +13,7 @@ body {
     margin: 50px auto;
     text-align: center;
 }
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=email] {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
