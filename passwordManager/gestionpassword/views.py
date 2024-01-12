@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, SiteInfoForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -30,10 +30,18 @@ def home_view(request):
     sites = SiteInfo.objects.filter(user=request.user)
     return render(request, 'gestionpassword/home.html', {'sites': sites})
 
-
+@login_required
 def add_password_view(request):
-    #logic add password
-    return render(request, 'gestionpassword/add_password.html')
+    if request.method == 'POST':
+        form = SiteInfoForm(request.POST)
+        if form.is_valid():
+            site_info = form.save(commit=False)
+            site_info.user = request.user 
+            site_info.save()
+            return redirect('home')  
+    else:
+        form = SiteInfoForm()
+    return render(request, 'gestionpassword/add_password.html', {'form': form})
 
 
 def view_all_passwords_view(request):
