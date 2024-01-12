@@ -8,6 +8,7 @@ from .models import SiteInfo
 from django.core.files.storage import FileSystemStorage
 import csv
 from django.contrib import messages
+from django.http import HttpResponse
 
 def login_view(request):
     #logic de connexion
@@ -51,29 +52,54 @@ def add_password_view(request):
 @login_required
 def gestion_csv_view(request):
     if request.method == 'POST':
-        csv_file = request.FILES['csv_file']
-        
-        if not csv_file.name.endswith('.csv'):
-            messages.error(request, 'Le fichier n\'est pas au format CSV')
-            return redirect('gestion_csv')
+        uploaded_file = request.FILES['csv_file']
+        if uploaded_file.name.endswith('.csv'):
+            data = uploaded_file.read().decode('utf-8').splitlines()
 
-        csv_data = csv_file.read().decode('utf-8')
-        csv_reader = csv.reader(csv_data.splitlines())
+            # Skip the first line (header)
+            csv_reader = csv.reader(data)
+            next(csv_reader, None)  # Skip the header line
 
-        for row in csv_reader:
-            if len(row) >= 4:
-                site_info = SiteInfo(
+            for line in csv_reader:
+                site_name, site_url, username, password = line
+
+                # Check if a site with the same data exists for the current user
+                existing_site = SiteInfo.objects.filter(
                     user=request.user,
-                    site_name=row[0],
-                    site_url=row[1],
-                    username=row[2],
-                    password=row[3]
-                )
-                site_info.save()
-        
-        return redirect('home')
+                    site_name=site_name,
+                    site_url=site_url,
+                    username=username
+                ).first()
+
+                if not existing_site:
+                    # Create a new site record
+                    new_site = SiteInfo(
+                        user=request.user,
+                        site_name=site_name,
+                        site_url=site_url,
+                        username=username,
+                        password=password
+                    )
+                    new_site.save()
+
+            return redirect('home')
 
     return render(request, 'gestionpassword/gestion_csv.html')
+
+@login_required
+def download_csv(request):
+    sites = SiteInfo.objects.filter(user=request.user)
+    
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="sites.csv"'
+
+    writer = csv.writer(response, delimiter=',')
+    writer.writerow(['Site Name', 'Site URL', 'Username', 'Password'])
+
+    for site in sites:
+        writer.writerow([site.site_name, site.site_url, site.username, site.password])
+
+    return response
 
 @login_required
 def delete_site(request, site_id):

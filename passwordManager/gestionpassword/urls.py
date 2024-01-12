@@ -12,4 +12,5 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'), 
     path('delete_site/<int:site_id>/', views.delete_site, name='delete_site'),
     path('edit_site/<int:site_id>/', views.edit_site, name='edit_site'),
+    path('download_csv/', views.download_csv, name='download_csv'),
 ]

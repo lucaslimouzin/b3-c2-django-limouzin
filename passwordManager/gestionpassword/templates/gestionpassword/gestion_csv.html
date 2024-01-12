@@ -2,12 +2,17 @@
 {% load static %}
 
 {% block content %}
-  <div id="csv-container">
+  <div id="csv-import-container">
     <h2>Importer un CSV</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="file" name="csv_file" accept=".csv" required> <br>
         <br><button type="submit" class="btn">Importer CSV</button>
     </form>
+  </div>
+  <br>
+  <div id="csv-export-container">
+    <h2>Exporter en CSV</h2>
+    <a href="{% url 'download_csv' %}" class="btn">Télécharger en CSV</a>
   </div>
 {% endblock %}
