@@ -11,4 +11,5 @@ urlpatterns = [
     path('view_all/', views.view_all_passwords_view, name='view_all'),  
     path('logout/', views.logout_view, name='logout'), 
     path('delete_site/<int:site_id>/', views.delete_site, name='delete_site'),
+    path('edit_site/<int:site_id>/', views.edit_site, name='edit_site'),
 ]

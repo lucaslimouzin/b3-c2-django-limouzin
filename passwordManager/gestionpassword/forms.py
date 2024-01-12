@@ -26,3 +26,8 @@ class SiteInfoForm(forms.ModelForm):
         widgets = {
             'password': forms.PasswordInput(),
         }
+
+class SiteInfoEditForm(forms.ModelForm):
+    class Meta:
+        model = SiteInfo
+        fields = ['site_name', 'site_url', 'username', 'password'] 

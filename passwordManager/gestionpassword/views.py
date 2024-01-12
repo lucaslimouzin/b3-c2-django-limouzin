@@ -1,5 +1,6 @@
 from django.shortcuts import render,get_object_or_404, redirect
 from .forms import CustomUserCreationForm, SiteInfoForm
+from .forms import SiteInfoForm, SiteInfoEditForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -54,3 +55,20 @@ def delete_site(request, site_id):
     if request.user == site.user:
         site.delete()
     return redirect('home')
+
+@login_required
+def edit_site(request, site_id):
+    site = get_object_or_404(SiteInfo, pk=site_id)
+
+    if request.user != site.user:
+        return redirect('home')
+
+    if request.method == 'POST':
+        form = SiteInfoEditForm(request.POST, instance=site)  
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = SiteInfoEditForm(instance=site) 
+
+    return render(request, 'gestionpassword/edit_site.html', {'form': form, 'site': site})

@@ -22,7 +22,7 @@ body.dark-mode {
     text-align: center;
     padding: 20px 0;
 }
-#container, #signup-container, #home-container, #add-password-container {
+#container, #signup-container, #home-container, #add-password-container, #edit-site-container {
     max-width: 400px;
     margin: 50px auto;
     text-align: center;

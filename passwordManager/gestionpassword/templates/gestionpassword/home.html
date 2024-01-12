@@ -16,6 +16,10 @@
           <p>URL: <a>{{ site.site_url }}</a></p>
           <p>Identifiant: {{ site.username }}</p>
           <p>Mot de passe: {{ site.password }}</p>
+          <form method="get" action="{% url 'edit_site' site.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-edit">Éditer</button>
+          </form>
           <button class="delete-btn" onclick="confirmDelete('{{ site.get_delete_url }}')">Supprimer</button>
 
         </div>
