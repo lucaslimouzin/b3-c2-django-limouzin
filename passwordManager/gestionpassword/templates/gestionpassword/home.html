@@ -1,0 +1,12 @@
+{% extends "gestionpassword/base.html" %}
+{% load static %}
+
+{% block content %}
+  <div id="home-container">
+    <h1>Bienvenue sur votre application de gestion de mots de passe</h1>
+    <p>Gérez tous vos mots de passe depuis un seul endroit. Sécurisé, rapide et utile.</p>
+    <!-- Boutons d'action -->
+    <a href="{% url 'add_password' %}" class="btn">Ajouter un nouveau mot de passe +</a>
+    <a href="{% url 'view_all' %}" class="btn">Voir tout 🔍</a>
+  </div>
+{% endblock %}
