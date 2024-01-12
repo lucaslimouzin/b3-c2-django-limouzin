@@ -57,3 +57,16 @@ a {
 a:hover, a:focus {
     text-decoration: underline;
 }
+
+/* Styles pour les accordéons */
+.accordion {
+    
+}
+
+.accordion-header {
+    cursor: pointer;
+}
+
+.accordion-body {
+    display: none;
+}

@@ -3,6 +3,7 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from .models import SiteInfo
 
 def login_view(request):
     #logic de connexion
@@ -26,7 +27,8 @@ def logout_view(request):
 @login_required
 def home_view(request):
     #logic home
-    return render(request, 'gestionpassword/home.html')
+    sites = SiteInfo.objects.filter(user=request.user)
+    return render(request, 'gestionpassword/home.html', {'sites': sites})
 
 
 def add_password_view(request):
