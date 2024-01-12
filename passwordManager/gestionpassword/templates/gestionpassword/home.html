@@ -6,7 +6,7 @@
     <h1>Bienvenue {{ user.username }} <br> sur votre application de gestion de mots de passe</h1>
     <p>Gérez tous vos mots de passe depuis un seul endroit. Sécurisé, rapide et utile.</p>
     <!-- Boutons d'action -->
-    <a href="{% url 'add_password' %}" class="btn">Ajouter un nouveau mot de passe +</a><br><br><br>
+    <a href="{% url 'add_password' %}" class="btn">Ajouter un nouveau site +</a><br><br><br>
     <!-- En dessous mettre la liste des sites avec mot de passe en caché-->
     <!-- Accordéons pour chaque site -->
     <h2>Mes sites</h2>
@@ -21,6 +21,7 @@
             {% csrf_token %}
             <button type="submit" class="btn btn-edit">Éditer</button>
           </form>
+          <br>
           <button class="delete-btn" onclick="confirmDelete('{{ site.get_delete_url }}')">Supprimer</button>
 
         </div>

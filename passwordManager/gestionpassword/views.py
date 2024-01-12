@@ -5,6 +5,9 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .models import SiteInfo
+from django.core.files.storage import FileSystemStorage
+import csv
+from django.contrib import messages
 
 def login_view(request):
     #logic de connexion
@@ -45,9 +48,32 @@ def add_password_view(request):
     return render(request, 'gestionpassword/add_password.html', {'form': form})
 
 
-def view_all_passwords_view(request):
-    #logic view all
-    return render(request, 'gestionpassword/view_all.html')
+@login_required
+def gestion_csv_view(request):
+    if request.method == 'POST':
+        csv_file = request.FILES['csv_file']
+        
+        if not csv_file.name.endswith('.csv'):
+            messages.error(request, 'Le fichier n\'est pas au format CSV')
+            return redirect('gestion_csv')
+
+        csv_data = csv_file.read().decode('utf-8')
+        csv_reader = csv.reader(csv_data.splitlines())
+
+        for row in csv_reader:
+            if len(row) >= 4:
+                site_info = SiteInfo(
+                    user=request.user,
+                    site_name=row[0],
+                    site_url=row[1],
+                    username=row[2],
+                    password=row[3]
+                )
+                site_info.save()
+        
+        return redirect('home')
+
+    return render(request, 'gestionpassword/gestion_csv.html')
 
 @login_required
 def delete_site(request, site_id):
