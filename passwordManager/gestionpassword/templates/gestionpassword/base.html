@@ -1,11 +1,12 @@
 {% load static %}
+{% load my_filters %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Password Manager</title>
     <link rel="stylesheet" href="{% static 'gestionpassword/styles.css' %}">
-    <!-- Ajoutez ici d'autres ressources CSS ou JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -61,6 +62,22 @@
         function confirmDelete(url) {
             if (confirm("Êtes-vous sûr de vouloir supprimer ce site ?")) {
                 window.location.href = url;
+            }
+        }
+    </script>
+    <script>
+        function togglePasswordVisibility(passwordFieldId) {
+            var passwordField = document.getElementById(passwordFieldId);
+            var toggleButton = document.getElementById("togglePassword" + passwordFieldId);
+    
+            if (passwordField.getAttribute("data-type") === "password") {
+                passwordField.textContent = passwordField.getAttribute("data-password");
+                passwordField.setAttribute("data-type", "text");
+                toggleButton.className = "far fa-eye-slash";
+            } else {
+                passwordField.textContent = "●".repeat(passwordField.getAttribute("data-password-length"));
+                passwordField.setAttribute("data-type", "password");
+                toggleButton.className = "far fa-eye";
             }
         }
     </script>
