@@ -130,3 +130,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #redirection si pas connecté
 LOGIN_URL = 'login'
+
+#redirige si connecté
+LOGIN_REDIRECT_URL = 'home'
