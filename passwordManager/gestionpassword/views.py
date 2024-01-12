@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render,get_object_or_404, redirect
 from .forms import CustomUserCreationForm, SiteInfoForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -47,3 +47,10 @@ def add_password_view(request):
 def view_all_passwords_view(request):
     #logic view all
     return render(request, 'gestionpassword/view_all.html')
+
+@login_required
+def delete_site(request, site_id):
+    site = get_object_or_404(SiteInfo, pk=site_id)
+    if request.user == site.user:
+        site.delete()
+    return redirect('view_all')
