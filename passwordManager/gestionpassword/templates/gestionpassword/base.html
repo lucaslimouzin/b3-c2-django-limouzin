@@ -10,11 +10,12 @@
 <body>
     <header>
         <!-- menus -->
-        <nav>
+        <nav class="navbar">
             <a href="{% url 'home' %}">Accueil</a>
             <a href="{% url 'add_password' %}">Ajouter mot de passe</a>
             <a href="{% url 'view_all' %}">Gérer les mots de passe</a>
             <a href="{% url 'logout' %}">logout</a>
+            <button onclick="toggleDarkMode()">Mode Sombre</button>
             
         </nav>
     </header>
@@ -25,9 +26,21 @@
         {% endblock content %}
     </main>
 
-    <footer>
+    <footer class="footer">
         <!-- footer-->
         <p>©lucaslimouzin 2024 Password Manager. Tous droits réservés.</p>
     </footer>
+    <script>
+        function toggleDarkMode() {
+            var isDarkMode = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+        }
+    
+        window.onload = function() {
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+            }
+        }
+        </script>
 </body>
 </html>

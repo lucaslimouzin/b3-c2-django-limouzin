@@ -1,7 +1,27 @@
+/* Styles par défaut (mode clair) */
 body {
-    font-family: Arial, sans-serif;
+    background-color: white;
+    color: black;
 }
 
+/* Styles pour le mode sombre */
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+.navbar {
+    text-align: center; 
+}
+.navbar a {
+    display: inline-block; 
+    margin: 0 10px;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px 0;
+}
 #container, #signup-container, #home-container {
     max-width: 400px;
     margin: 50px auto;
