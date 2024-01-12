@@ -47,6 +47,22 @@ button[type=submit]:hover {
     opacity: 0.8;
 }
 
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+
 a {
     display: inline-block;
     margin-top: 20px;
