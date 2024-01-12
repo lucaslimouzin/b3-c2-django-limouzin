@@ -6,8 +6,8 @@ body {
 
 /* Styles pour le mode sombre */
 body.dark-mode {
-    background-color: #121212;
-    color: white;
+    background-color: #212121;
+    color: #ECECF1;
 }
 
 .navbar {
@@ -50,4 +50,10 @@ button[type=submit]:hover {
 a {
     display: inline-block;
     margin-top: 20px;
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
 }
