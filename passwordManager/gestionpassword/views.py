@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 def login_view(request):
     #logic de connexion
@@ -18,6 +19,9 @@ def signup_view(request):
         form = CustomUserCreationForm()
     return render(request, 'gestionpassword/signup.html', {'form': form})
 
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 @login_required
 def home_view(request):
