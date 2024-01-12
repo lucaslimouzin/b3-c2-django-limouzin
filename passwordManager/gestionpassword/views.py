@@ -53,4 +53,4 @@ def delete_site(request, site_id):
     site = get_object_or_404(SiteInfo, pk=site_id)
     if request.user == site.user:
         site.delete()
-    return redirect('view_all')
+    return redirect('home')

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class SiteInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -10,3 +11,6 @@ class SiteInfo(models.Model):
 
     def __str__(self):
         return self.site_name
+    
+    def get_delete_url(self):
+        return reverse('delete_site', args=[str(self.pk)])

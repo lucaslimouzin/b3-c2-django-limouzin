@@ -56,6 +56,13 @@
                 });
             });
         });
-        </script>
+    </script>
+    <script>
+        function confirmDelete(url) {
+            if (confirm("Êtes-vous sûr de vouloir supprimer ce site ?")) {
+                window.location.href = url;
+            }
+        }
+    </script>
 </body>
 </html>
