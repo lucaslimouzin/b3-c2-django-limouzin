@@ -13,10 +13,7 @@
         <p>Veuillez vous inscrire <br>et gérer facilement vos mots de passe.</p>
         <form method="post" action="{% url 'signup' %}">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Nom d'utilisateur">
-            <input type="email" name="email" placeholder="Adresse email">
-            <input type="password" name="password1" placeholder="Mot de passe">
-            <input type="password" name="password2" placeholder="Confirmer le mot de passe">
+            {{ form.as_p }} 
             <button type="submit">S'inscrire</button>
         </form>
         <p>Vous avez déjà un compte ? <a href="{% url 'login' %}">Se connecter</a></p>
